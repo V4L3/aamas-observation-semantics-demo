@@ -1,0 +1,8 @@
+[submodule "yggdrasil"]
+	path = hypermedia_yggdrasil
+	url = git@github.com:V4L3/yggdrasil-update.git
+	branch = observation-semantics
+[submodule "hyperagents"]
+	path = hyperagents
+	url = https://github.com/V4L3/hyperagents-jacamo-hypermedia.git
+	branch = observation-semantics
