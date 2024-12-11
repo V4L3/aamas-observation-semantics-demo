@@ -58,11 +58,11 @@ curl --request POST \
 You can simulate a fall being detected with the following command:
 ```bash
 curl --request POST \
-  --url http://localhost:8080/workspaces/103/artifacts/f3/triggerFallDetected \
+  --url http://localhost:8080/workspaces/103/artifacts/o3/triggerFallDetected \
   --header 'X-Agent-WebID: http://localhost:8080/agents/aamasdemo'
 ```
 
-Once actions are simulated the corresponding request should be visible on the proxy (localhost:3000) where they can be forwarded to the agent.
+Once actions are simulated the corresponding request should be visible on the proxy (**http://localhost:3000/requests**) where they can be forwarded to the agent.
 ---
 
 ## Notes
