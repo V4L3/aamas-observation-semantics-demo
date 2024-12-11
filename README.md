@@ -13,7 +13,7 @@ This repository contains three main services designed to interact in a hypermedi
 ### Step 1: Clone the Repository
 Clone the repository recursively with submodules:
 ```bash
-git clone --recursive <repository-url>
+git clone --recursive https://github.com/V4L3/aamas-observation-semantics-demo.git
 ```
 Then navigate to the repository:
 ```bash
@@ -62,9 +62,11 @@ curl --request POST \
   --header 'X-Agent-WebID: http://localhost:8080/agents/aamasdemo'
 ```
 
+Once actions are simulated the corresponding request should be visible on the proxy (localhost:3000) where they can be forwarded to the agent.
 ---
 
 ## Notes
 - Ensure all services are running before executing the simulation commands.
 - For additional configuration or debugging, consult the individual service directories.
+- The proxy UI does not automatically refresh, open requests are fetch on every reload only.
 
