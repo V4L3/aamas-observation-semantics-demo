@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stored Requests</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+
+<body>
+    <h1>Stored Requests</h1>
+    {{range .Requests}}
+    <div class="requests">
+        <p><strong>ID:</strong> {{.ID}}</p>
+        <p><strong>Body:</strong></p>
+        <pre><code class="language-json">{{.Body}}</code></pre>
+        <button class="submitBtn" requestID="{{.ID}}" type="submit">Forward</button>
+    </div>
+    <hr>
+    {{end}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+
+    <script>
+        function safeJsonParse(str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {
+                console.error('Invalid JSON:', e);
+                return null;
+            }
+        }
+
+        // Format the JSON content in the <code> elements
+        const requestDivs = document.querySelectorAll('.requests');
+        requestDivs.forEach(div => {
+            const codeElement = div.querySelector('code.language-json');
+
+            if (codeElement) {
+                const jsonLdString = codeElement.textContent;
+
+                const jsonObj = safeJsonParse(jsonLdString);
+
+                if (jsonObj) {
+                    const formattedJson = JSON.stringify(jsonObj, null, 2);
+                    codeElement.textContent = formattedJson;
+                    Prism.highlightElement(codeElement);
+                } else {
+                    codeElement.textContent = 'Invalid JSON content.';
+                }
+            }
+        });
+
+        // Handle the "Forward" button clicks
+        const submitBtns = document.querySelectorAll('.submitBtn');
+        submitBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const requestID = e.target.getAttribute('requestID');
+                fetch('/forward', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: requestID
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('Request forwarded');
+                        window.location.reload();
+                    } else {
+                        console.log('Request failed');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

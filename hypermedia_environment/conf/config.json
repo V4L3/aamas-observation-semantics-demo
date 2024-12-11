@@ -1,0 +1,101 @@
+{
+  "http-config": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "base-uri": "http://localhost:8080"
+  },
+  "notification-config": {
+    "enabled": true
+  },
+  "environment-config": {
+    "enabled": true,
+    "known-artifacts": [
+      {
+        "class": "http://example.org/SecuritySystem",
+        "template": "ch.unisg.ics.interactions.SecuritySystem"
+      },
+      {
+        "class": "http://example.org/SyncedSecuritySystem",
+        "template": "ch.unisg.ics.interactions.SyncedSecuritySystem"
+      },
+      {
+        "class": "http://example.org/OccupancySensor",
+        "template": "ch.unisg.ics.interactions.OccupancySensor"
+      },
+      {
+        "class": "http://example.org/SyncedOccupancySensor",
+        "template": "ch.unisg.ics.interactions.SyncedOccupancySensor"
+      }
+    ],
+    "workspaces": [
+      {
+        "name": "10"
+      },
+      {
+        "name": "100",
+        "parent-name": "10",
+        "artifacts": [
+          {}
+        ]
+      },
+      {
+        "name": "101",
+        "parent-name": "10",
+        "artifacts": [
+          {
+            "name": "r1",
+            "class": "http://example.org/SecuritySystem",
+            "init-params": []
+          },
+          {
+            "name": "o1",
+            "class": "http://example.org/OccupancySensor",
+            "init-params": []
+          }
+        ]
+      },
+      {
+        "name": "102",
+        "parent-name": "10",
+        "artifacts": [
+          {
+            "name": "r2",
+            "class": "http://example.org/SyncedSecuritySystem",
+            "init-params": []
+          },
+          {
+            "name": "o2",
+            "class": "http://example.org/OccupancySensor",
+            "init-params": []
+          }
+        ]
+      },
+      {
+        "name": "103",
+        "parent-name": "10",
+        "artifacts": [
+          {
+            "name": "r3",
+            "class": "http://example.org/SyncedSecuritySystem",
+            "init-params": [
+              {
+                "name": "o3",
+                "endpoint": "http://localhost:8080/workspaces/103/artifacts/o3/updateExternalTimestamp"
+              }
+            ]
+          },
+          {
+            "name": "o3",
+            "class": "http://example.org/SyncedOccupancySensor",
+            "init-params": [
+              {
+                "name": "r3",
+                "endpoint": "http://localhost:8080/workspaces/103/artifacts/r3/updateExternalTimestamp"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

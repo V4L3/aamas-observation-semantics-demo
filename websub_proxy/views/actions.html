@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Unlock Room</title>
+</head>
+
+<body>
+    <h1>Unlock Room</h1>
+    <button id="unlockRoomBtn" type="button">Unlock Room</button>
+
+    <script>
+        document.getElementById('unlockRoomBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/unlock-room', { method: 'POST' });
+                if (response.ok) {
+                    const data = await response.text();
+                    alert('Room unlocked successfully: ' + data);
+                } else {
+                    alert(`Failed to unlock room. Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error unlocking room:', error);
+                alert('An error occurred while unlocking the room.');
+            }
+        });
+    </script>
+</body>
+
+</html>

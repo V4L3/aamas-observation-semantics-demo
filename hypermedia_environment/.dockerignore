@@ -1,0 +1,16 @@
+.gradle
+/build
+/out
+/.idea
+*.iml
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.db
+*.sqlite3
+*.log
+.env
+.git
+.gitmodules
